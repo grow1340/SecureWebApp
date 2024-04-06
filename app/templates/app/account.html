@@ -1,0 +1,28 @@
+﻿{% extends "app/layout.html" %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Save changes</button>
+</form>
+
+
+{% else %}
+
+<h2>Tricky! Create an account to gain permission.</h2>
+
+
+
+{% endif %}
+
+{% endblock %}

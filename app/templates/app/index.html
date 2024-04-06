@@ -1,0 +1,61 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <div class="jumbotron">
+    <h1>Marketplace</h1>
+    <p class="lead">Welcome, {{ request.user.username }}!</p>
+     <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <a href="{% url 'create' %}" class="btn btn-primary btn-lg btn-block">Create a Listing</a>
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'cart' %}" class="btn btn-primary btn-lg btn-block">View Cart</a>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+
+    <div class"container">
+    <div class="row">
+    {% for item in item_list %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text">Price: ${{ item.price }}</p>
+          {% if item.user_id != user.id %}
+          <a href="{% url 'add_to_cart' item.id %}" class="btn btn-primary">Add to Cart</a>
+          {% else %}
+          <a href="{% url 'delete_item' item.id %}" class="btn btn-primary">Delete Listing</a>
+          {% endif %}
+           <hr />
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+    </div>
+
+
+{% else %}
+  
+    <!-- Non-authenticated user content -->
+
+<div class="jumbotron">
+    <h1>CS6417 Marketplace</h1>
+    <p class="lead">This is a secure web application that simulates a marketplace.</p>
+</div>
+
+{% endif %}
+{% endblock %}

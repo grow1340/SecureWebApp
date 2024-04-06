@@ -1,0 +1,47 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h2>{{ title }}.</h2>
+
+{% for item in item_list %}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+
+
+                <h5 class="card-title">{{ item.title }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+                <p class="card-text">Price: ${{ item.price }}</p>
+                <hr />
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endfor %}
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Total: {{ total }}</h3>
+        <hr />
+        <a href="" class="btn btn-primary">Checkout</a>
+    </div>
+</div>
+
+{% else %}
+
+<h2>Tricky! Create an account to gain permission.</h2>
+
+
+
+{% endif %}
+
+
+{% endblock %}
